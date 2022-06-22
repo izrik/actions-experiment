@@ -16,8 +16,8 @@ on:
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   # This workflow contains a single job called "build"
-  notify:
-#    if: github.event.pull_request.merged == true
+  notify_merged:
+    if: github.event.pull_request.merged == true
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
 
@@ -31,7 +31,7 @@ jobs:
         run: |
           curl -v ${{ secrets.ROCKET_CHAT_SERVER_URI }}/api/v1/chat.postMessage \
             -X POST \
-            --data '{"channel":"#test","text":"This is a multi-line test from GitHub Actions"}' \
+            --data '{"channel":"#test","text":"A pull request was opened by ${{github.event.pull_request.author }} and merged by ${{github.event.pull_request.mergedBy }}"}' \
             -H "X-Auth-Token: ${{ secrets.ROCKET_CHAT_TOKEN }}" \
             -H "X-User-Id: ${{ secrets.ROCKET_CHAT_USER_ID }}" \
             -H "Content-Type: application/json"
