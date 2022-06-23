@@ -20,6 +20,8 @@ jobs:
     steps:
       - name: print values
         run: |
+          echo github.event: ${{ github.event }}
+          echo github.event.pull_request: ${{ github.event.pull_request }}
           echo github.event.pull_request.author: ${{ github.event.pull_request.author }}
           echo github.event.pull_request.author.login: ${{ github.event.pull_request.author.login }}
           echo github.event.pull_request.baseRef: ${{ github.event.pull_request.baseRef }}
@@ -62,6 +64,7 @@ jobs:
 
       - name: print values
         run: |
+          echo github.event: ${{ github.event }}
           echo github.event.pull_request: ${{ github.event.pull_request }}
           echo github.event.pull_request.author: ${{ github.event.pull_request.author }}
           echo github.event.pull_request.author.login: ${{ github.event.pull_request.author.login }}
