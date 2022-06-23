@@ -15,7 +15,12 @@ on:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  # This workflow contains a single job called "build"
+  print_values:
+    runs-on: ubuntu-latest
+    steps:
+      - name: print values
+        run: |
+          echo github.event.pull_request.merged: ${{ github.event.pull_request.merged }}
   notify_merged:
     if: github.event.pull_request.merged == true
     # The type of runner that the job will run on
