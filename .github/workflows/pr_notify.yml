@@ -23,6 +23,8 @@ jobs:
           echo github.event: ${{ github.event }}
           echo github.event.pull_request: ${{ github.event.pull_request }}
           echo github.event.pull_request.author: ${{ github.event.pull_request.author }}
+          echo github.event.pull_request.author==null: ${{ github.event.pull_request.author == null }}
+          echo github.event.pull_request.author=="": ${{ github.event.pull_request.author == "" }}
           echo github.event.pull_request.author.login: ${{ github.event.pull_request.author.login }}
           echo github.event.pull_request.baseRef: ${{ github.event.pull_request.baseRef }}
           echo github.event.pull_request.baseRefName: ${{ github.event.pull_request.baseRefName }}
@@ -67,6 +69,8 @@ jobs:
           echo github.event: ${{ github.event }}
           echo github.event.pull_request: ${{ github.event.pull_request }}
           echo github.event.pull_request.author: ${{ github.event.pull_request.author }}
+          echo github.event.pull_request.author==null: ${{ github.event.pull_request.author == null }}
+          echo github.event.pull_request.author=="": ${{ github.event.pull_request.author == "" }}
           echo github.event.pull_request.author.login: ${{ github.event.pull_request.author.login }}
           echo github.event.pull_request.baseRef: ${{ github.event.pull_request.baseRef }}
           echo github.event.pull_request.baseRefName: ${{ github.event.pull_request.baseRefName }}
