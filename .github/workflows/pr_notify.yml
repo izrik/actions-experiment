@@ -56,7 +56,7 @@ jobs:
           echo github.event.pull_request.url: ${{ github.event.pull_request.url }}
       - name: Run a one-line script
         run: |
-          curl -v '${{ secrets.ROCKET_CHAT_SERVER_URI }}/api/v1/chat.postMessage' \
+          echo curl -v '${{ secrets.ROCKET_CHAT_SERVER_URI }}/api/v1/chat.postMessage' \
             -X POST \
             --data '{"channel":"#test","text":"AUTOMATED MESSAGE: Something happened to a PR:\n' \
               'number ${{ github.event.pull_request.number }} \n' \
