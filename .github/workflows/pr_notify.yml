@@ -21,6 +21,7 @@ jobs:
       - name: print values
         run: |
           echo github.event.pull_request.author: ${{ github.event.pull_request.author }}
+          echo github.event.pull_request.author.login: ${{ github.event.pull_request.author.login }}
           echo github.event.pull_request.baseRef: ${{ github.event.pull_request.baseRef }}
           echo github.event.pull_request.baseRefName: ${{ github.event.pull_request.baseRefName }}
           echo github.event.pull_request.baseRefOid: ${{ github.event.pull_request.baseRefOid }}
