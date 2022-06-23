@@ -62,8 +62,8 @@ jobs:
               'number ${{ github.event.pull_request.number }} \n' \
               ':link: ${{ github.event.pull_request.url }} \n' \
               'opened by ${{ github.event.pull_request.author }} "}' \
-            -H "X-Auth-Token: ${{ secrets.ROCKET_CHAT_TOKEN }}" \
-            -H "X-User-Id: ${{ secrets.ROCKET_CHAT_USER_ID }}" \
+            -H 'X-Auth-Token: ${{ secrets.ROCKET_CHAT_TOKEN }}' \
+            -H 'X-User-Id: ${{ secrets.ROCKET_CHAT_USER_ID }}' \
             -H "Content-Type: application/json"
           curl -v '${{ secrets.ROCKET_CHAT_SERVER_URI }}/api/v1/chat.postMessage' \
             -X POST \
@@ -71,8 +71,8 @@ jobs:
               'number ${{ github.event.pull_request.number }} \n' \
               ':link: ${{ github.event.pull_request.url }} \n' \
               'opened by ${{ github.event.pull_request.author }} "}' \
-            -H "X-Auth-Token: ${{ secrets.ROCKET_CHAT_TOKEN }}" \
-            -H "X-User-Id: ${{ secrets.ROCKET_CHAT_USER_ID }}" \
+            -H 'X-Auth-Token: ${{ secrets.ROCKET_CHAT_TOKEN }}' \
+            -H 'X-User-Id: ${{ secrets.ROCKET_CHAT_USER_ID }}' \
             -H "Content-Type: application/json"
   notify_merged:
     if: github.event.pull_request.merged == true
