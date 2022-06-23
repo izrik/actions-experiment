@@ -64,7 +64,7 @@ jobs:
         run: |
           curl -v ${{ secrets.ROCKET_CHAT_SERVER_URI }}/api/v1/chat.postMessage \
             -X POST \
-            --data '{"channel":"#test","text":"A pull request was opened by ${{github.event.pull_request.author }} and merged by ${{github.event.pull_request.mergedBy }}"}' \
+            --data '{"channel":"#test","text":"AUTOMATED MESSAGE: A pull request was opened by ${{github.event.pull_request.author }} and merged by ${{github.event.pull_request.mergedBy }}"}' \
             -H "X-Auth-Token: ${{ secrets.ROCKET_CHAT_TOKEN }}" \
             -H "X-User-Id: ${{ secrets.ROCKET_CHAT_USER_ID }}" \
             -H "Content-Type: application/json"
