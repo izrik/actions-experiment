@@ -54,6 +54,18 @@ jobs:
           echo github.event.pull_request.title: ${{ github.event.pull_request.title }}
           echo github.event.pull_request.updatedAt: ${{ github.event.pull_request.updatedAt }}
           echo github.event.pull_request.url: ${{ github.event.pull_request.url }}
+      - name: Run a one-line script
+        run: |
+          curl -v ${{ secrets.ROCKET_CHAT_SERVER_URI }}/api/v1/chat.postMessage \
+            -X POST \
+            --data '{"channel":"#test","text":"AUTOMATED MESSAGE: Something happened to a PR:\n'\
+              'number ${{github.event.pull_request.number}}\n' \
+              ':link: ${{github.event.pull_request.url }}\n' \
+              'opened by ${{github.event.pull_request.author }}' \
+              '"}' \
+            -H "X-Auth-Token: ${{ secrets.ROCKET_CHAT_TOKEN }}" \
+            -H "X-User-Id: ${{ secrets.ROCKET_CHAT_USER_ID }}" \
+            -H "Content-Type: application/json"
   notify_merged:
     if: github.event.pull_request.merged == true
     # The type of runner that the job will run on
@@ -100,13 +112,12 @@ jobs:
           echo github.event.pull_request.title: ${{ github.event.pull_request.title }}
           echo github.event.pull_request.updatedAt: ${{ github.event.pull_request.updatedAt }}
           echo github.event.pull_request.url: ${{ github.event.pull_request.url }}
-      # Runs a single command using the runners shell
       - name: Run a one-line script
         run: |
           curl -v ${{ secrets.ROCKET_CHAT_SERVER_URI }}/api/v1/chat.postMessage \
             -X POST \
             --data '{"channel":"#test","text":"AUTOMATED MESSAGE: Something happened to a PR:\n'\
-              'number ${{github.event.pull_request.number}}\n' \ 
+              'number ${{github.event.pull_request.number}}\n' \
               ':link: ${{github.event.pull_request.url }}\n' \
               'opened by ${{github.event.pull_request.author }}' \
               '"}' \
