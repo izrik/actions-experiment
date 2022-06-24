@@ -4,6 +4,8 @@ name: push
 
 on:
   push:
+    branches:
+      - master
 
 jobs:
   print_values:
@@ -12,65 +14,21 @@ jobs:
       - name: print values
         run: |
           echo github.event: ${{ github.event }}
-          echo github.event.pull_request: ${{ github.event.pull_request }}
-          echo github.event.pull_request.actor: ${{ github.event.pull_request.actor }}
-          echo github.event.pull_request.author: ${{ github.event.pull_request.author }}
-          echo github.event.pull_request.asdf: ${{ github.event.pull_request.asdf }}
-          echo github.event.pull_request.author==null: ${{ github.event.pull_request.author == null }}
-          echo github.event.pull_request.author==\'\': ${{ github.event.pull_request.author == '' }}
-          echo github.event.pull_request.author.login: ${{ github.event.pull_request.author.login }}
-          echo github.event.pull_request.base_ref: ${{ github.event.pull_request.base_ref }}
-          echo github.event.pull_request.baseRef: ${{ github.event.pull_request.baseRef }}
-          echo github.event.pull_request.base_ref_name: ${{ github.event.pull_request.base_ref_name }}
-          echo github.event.pull_request.baseRefName: ${{ github.event.pull_request.baseRefName }}
-          echo github.event.pull_request.base_ref_oid: ${{ github.event.pull_request.base_ref_oid }}
-          echo github.event.pull_request.baseRefOid: ${{ github.event.pull_request.baseRefOid }}
-          echo github.event.pull_request.base_repository: ${{ github.event.pull_request.base_repository }}
-          echo github.event.pull_request.baseRepository: ${{ github.event.pull_request.baseRepository }}
-          echo github.event.pull_request.closed: ${{ github.event.pull_request.closed }}
-          echo github.event.pull_request.closed_at: ${{ github.event.pull_request.closed_at }}
-          echo github.event.pull_request.closedAt: ${{ github.event.pull_request.closedAt }}
-          echo github.event.pull_request.commits: ${{ github.event.pull_request.commits }}
-          echo github.event.pull_request.commits_url: ${{ github.event.pull_request.commits_url }}
-          echo github.event.pull_request.created_at: ${{ github.event.pull_request.created_at }}
-          echo github.event.pull_request.createdAt: ${{ github.event.pull_request.createdAt }}
-          echo github.event.pull_request.head_ref: ${{ github.event.pull_request.head_ref }}
-          echo github.event.pull_request.headRef: ${{ github.event.pull_request.headRef }}
-          echo github.event.pull_request.head_ref_name: ${{ github.event.pull_request.head_ref_name }}
-          echo github.event.pull_request.headRefName: ${{ github.event.pull_request.headRefName }}
-          echo github.event.pull_request.head_ref_oid: ${{ github.event.pull_request.head_ref_oid }}
-          echo github.event.pull_request.headRefOid: ${{ github.event.pull_request.headRefOid }}
-          echo github.event.pull_request.head_repository: ${{ github.event.pull_request.head_repository }}
-          echo github.event.pull_request.headRepository: ${{ github.event.pull_request.headRepository }}
-          echo github.event.pull_request.is_cross_repository: ${{ github.event.pull_request.is_cross_repository }}
-          echo github.event.pull_request.isCrossRepository: ${{ github.event.pull_request.isCrossRepository }}
-          echo github.event.pull_request.is_draft: ${{ github.event.pull_request.is_draft }}
-          echo github.event.pull_request.isDraft: ${{ github.event.pull_request.isDraft }}
-          echo github.event.pull_request.merge_commit: ${{ github.event.pull_request.merge_commit }}
-          echo github.event.pull_request.merge_commit_sha: ${{ github.event.pull_request.merge_commit_sha }}
-          echo github.event.pull_request.mergeCommit: ${{ github.event.pull_request.mergeCommit }}
-          echo github.event.pull_request.merge_state_status: ${{ github.event.pull_request.merge_state_status }}
-          echo github.event.pull_request.mergeStateStatus: ${{ github.event.pull_request.mergeStateStatus }}
-          echo github.event.pull_request.mergeable: ${{ github.event.pull_request.mergeable }}
-          echo github.event.pull_request.merged: ${{ github.event.pull_request.merged }}
-          echo github.event.pull_request.merged_by: ${{ github.event.pull_request.merged_by }}
-          echo github.event.pull_request.mergedBy: ${{ github.event.pull_request.mergedBy }}
-          echo github.event.pull_request.number: ${{ github.event.pull_request.number }}
-          echo github.event.pull_request.potential_merge_commit: ${{ github.event.pull_request.potential_merge_commit }}
-          echo github.event.pull_request.potentialMergeCommit: ${{ github.event.pull_request.potentialMergeCommit }}
-          echo github.event.pull_request.published_at: ${{ github.event.pull_request.published_at }}
-          echo github.event.pull_request.publishedAt: ${{ github.event.pull_request.publishedAt }}
-          echo github.event.pull_request.repository: ${{ github.event.pull_request.repository }}
-          echo github.event.pull_request.resourcePath: ${{ github.event.pull_request.resourcePath }}
-          echo github.event.pull_request.state: ${{ github.event.pull_request.state }}
-          echo github.event.pull_request.title: ${{ github.event.pull_request.title }}
-          echo github.event.pull_request.updated_at: ${{ github.event.pull_request.updated_at }}
-          echo github.event.pull_request.updatedAt: ${{ github.event.pull_request.updatedAt }}
-          echo github.event.pull_request.user: ${{ github.event.pull_request.user }}
-          echo github.event.pull_request.user.id: ${{ github.event.pull_request.user.id }}
-          echo github.event.pull_request.user.name: ${{ github.event.pull_request.user.name }}
-          echo github.event.pull_request.user.login: ${{ github.event.pull_request.user.login }}
-          echo github.event.pull_request.url: ${{ github.event.pull_request.url }}
+          echo github.event.push: ${{ github.event.pull_request }}
+          echo github.event.push.next_sha: ${{ github.event.push.next_sha }}
+          echo github.event.push.nextSha: ${{ github.event.push.nextSha }}
+          echo github.event.push.permalink: ${{ github.event.push.permalink }}
+          echo github.event.push.html_url: ${{ github.event.push.html_url }}
+          echo github.event.push.url: ${{ github.event.push.url }}
+          echo github.event.push.previous_sha: ${{ github.event.push.previous_sha }}
+          echo github.event.push.previousSha: ${{ github.event.push.previousSha }}
+          echo github.event.push.pusher: ${{ github.event.push.pusher }}
+          echo github.event.push.pusher.login: ${{ github.event.push.pusher.login }}
+          echo github.event.push.repository: ${{ github.event.push.repository }}
+          echo github.event.push.repository.name: ${{ github.event.push.repository.name }}
+          echo github.event.push.repository.nameWithOwner: ${{ github.event.push.repository.nameWithOwner }}
+          echo github.event.push.repository.name_with_owner: ${{ github.event.push.repository.name_with_owner }}
+          echo github.event.push.repository.owner: ${{ github.event.push.repository.owner }}
           echo -n 'node:    ' ; which node
           echo -n 'python:  ' ; which python
           echo -n 'python2: ' ; which python2
@@ -79,3 +37,21 @@ jobs:
           echo -n 'gcc:     ' ; which gcc
           echo -n 'perl:    ' ; which perl
           echo -n 'jq:      ' ; which jq
+  notify_of_push:
+    runs-on: ubuntu-latest
+    steps:
+      - name: prepare and send message
+        run: |
+          echo -n '' > msg.json
+          echo -n '{"channel":"#test","text":"Someone (maybe ${{ github.event.push.pusher.login }}) pushed directly to master\n' >> msg.json
+          echo -n '"}' >> msg.json
+          echo '' >> msg.json
+          echo ":::::::::::::::"
+          cat msg.json
+          echo ":::::::::::::::"
+          curl -v ${{ secrets.ROCKET_CHAT_SERVER_URI }}/api/v1/chat.postMessage \
+            -X POST \
+            --data @msg.json \
+            -H "X-Auth-Token: ${{ secrets.ROCKET_CHAT_TOKEN }}" \
+            -H "X-User-Id: ${{ secrets.ROCKET_CHAT_USER_ID }}" \
+            -H "Content-Type: application/json"
