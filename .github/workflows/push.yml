@@ -15,20 +15,20 @@ jobs:
         run: |
           echo github.event: ${{ github.event }}
           echo github.event.push: ${{ github.event.pull_request }}
-          echo github.event.push.next_sha: ${{ github.event.push.next_sha }}
-          echo github.event.push.nextSha: ${{ github.event.push.nextSha }}
-          echo github.event.push.permalink: ${{ github.event.push.permalink }}
-          echo github.event.push.html_url: ${{ github.event.push.html_url }}
-          echo github.event.push.url: ${{ github.event.push.url }}
-          echo github.event.push.previous_sha: ${{ github.event.push.previous_sha }}
-          echo github.event.push.previousSha: ${{ github.event.push.previousSha }}
+          echo github.event.push.ref: ${{ github.event.push.ref }}
+          echo github.event.push.before: ${{ github.event.push.before }}
+          echo github.event.push.after: ${{ github.event.push.after }}
+          echo github.event.push.created: ${{ github.event.push.created }}
+          echo github.event.push.deleted: ${{ github.event.push.deleted }}
+          echo github.event.push.forced: ${{ github.event.push.forced }}
+          echo github.event.push.head_commit: ${{ github.event.push.head_commit }}
+          echo github.event.push.compare: ${{ github.event.push.compare }}
+          echo github.event.push.commits: ${{ github.event.push.commits }}
           echo github.event.push.pusher: ${{ github.event.push.pusher }}
-          echo github.event.push.pusher.login: ${{ github.event.push.pusher.login }}
           echo github.event.push.repository: ${{ github.event.push.repository }}
-          echo github.event.push.repository.name: ${{ github.event.push.repository.name }}
-          echo github.event.push.repository.nameWithOwner: ${{ github.event.push.repository.nameWithOwner }}
-          echo github.event.push.repository.name_with_owner: ${{ github.event.push.repository.name_with_owner }}
-          echo github.event.push.repository.owner: ${{ github.event.push.repository.owner }}
+          echo github.event.push.organization: ${{ github.event.push.organization }}
+          echo github.event.push.sender: ${{ github.event.push.sender }}
+          echo github.event.push.installation: ${{ github.event.push.installation }}
           echo -n 'node:    ' ; which node
           echo -n 'python:  ' ; which python
           echo -n 'python2: ' ; which python2
@@ -43,7 +43,7 @@ jobs:
       - name: prepare and send message
         run: |
           echo -n '' > msg.json
-          echo -n '{"channel":"#test","text":"Someone (maybe ${{ github.event.push.pusher.login }}) pushed directly to master\n' >> msg.json
+          echo -n '{"channel":"#test","text":"Someone (maybe ${{ github.event.push.pusher.name }}) pushed directly to master\n' >> msg.json
           echo -n '"}' >> msg.json
           echo '' >> msg.json
           echo ":::::::::::::::"
