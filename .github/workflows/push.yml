@@ -54,6 +54,8 @@ jobs:
           echo github.event.installation: ${{ github.event.installation }}
           echo github.event.sender: ${{ github.event.sender }}
           echo ''
+          echo github.event.pull_request: ${{ github.event.pull_request }}
+          echo ''
           echo -n 'node:    ' ; which node
           echo -n 'python:  ' ; which python
           echo -n 'python2: ' ; which python2
