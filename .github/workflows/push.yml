@@ -18,20 +18,13 @@ jobs:
           echo github.event.action: ${{ github.event.action }}
           echo github.event.client_payload.versions: ${{ github.event.client_payload.versions }}
           echo github.event.push: ${{ github.event.push }}
+          echo github.event.push.push_id: ${{ github.event.push.push_id }}
+          echo github.event.push.size: ${{ github.event.push.size }}
+          echo github.event.push.distinct_size: ${{ github.event.push.distinct_size }}
           echo github.event.push.ref: ${{ github.event.push.ref }}
+          echo github.event.push.head: ${{ github.event.push.head }}
           echo github.event.push.before: ${{ github.event.push.before }}
-          echo github.event.push.after: ${{ github.event.push.after }}
-          echo github.event.push.created: ${{ github.event.push.created }}
-          echo github.event.push.deleted: ${{ github.event.push.deleted }}
-          echo github.event.push.forced: ${{ github.event.push.forced }}
-          echo github.event.push.head_commit: ${{ github.event.push.head_commit }}
-          echo github.event.push.compare: ${{ github.event.push.compare }}
           echo github.event.push.commits: ${{ github.event.push.commits }}
-          echo github.event.push.pusher: ${{ github.event.push.pusher }}
-          echo github.event.push.repository: ${{ github.event.push.repository }}
-          echo github.event.push.organization: ${{ github.event.push.organization }}
-          echo github.event.push.sender: ${{ github.event.push.sender }}
-          echo github.event.push.installation: ${{ github.event.push.installation }}
           echo -n 'node:    ' ; which node
           echo -n 'python:  ' ; which python
           echo -n 'python2: ' ; which python2
