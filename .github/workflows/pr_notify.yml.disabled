@@ -55,6 +55,7 @@ jobs:
           echo github.event.pull_request.state: ${{ github.event.pull_request.state }}
           echo github.event.pull_request.title: ${{ github.event.pull_request.title }}
           echo github.event.pull_request.updatedAt: ${{ github.event.pull_request.updatedAt }}
+          echo github.event.pull_request.user: ${{ github.event.pull_request.user }}
           echo github.event.pull_request.url: ${{ github.event.pull_request.url }}
       - name: Run a one-line script
         run: |
