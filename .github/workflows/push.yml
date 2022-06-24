@@ -45,6 +45,11 @@ jobs:
           echo github.event.commits: ${{ github.event.commits }}
           echo github.event.pusher: ${{ github.event.pusher }}
           echo github.event.repository: ${{ github.event.repository }}
+          echo github.event.repository.name: ${{ github.event.repository.name }}
+          echo github.event.repository.owner: ${{ github.event.repository.owner }}
+          echo github.event.repository.nameWithOwner: ${{ github.event.repository.nameWithOwner }}
+          echo github.event.repository.name_with_owner: ${{ github.event.repository.name_with_owner }}
+          echo github.event.repository: ${{ github.event.repository }}
           echo github.event.organization: ${{ github.event.organization }}
           echo github.event.installation: ${{ github.event.installation }}
           echo github.event.sender: ${{ github.event.sender }}
@@ -63,7 +68,8 @@ jobs:
       - name: prepare and send message
         run: |
           echo -n '' > msg.json
-          echo -n '{"channel":"#test","text":"Someone (maybe ${{ github.event.push.pusher.name }}) pushed directly to master\n' >> msg.json
+          echo -n '{"channel":"#test","text":"Someone (maybe ${{ github.event.pusher.name }}) pushed directly to master\n' >> msg.json
+          echo -n 'Compare here: ${{ github.event.compare }}\n' >> msg.json
           echo -n '"}' >> msg.json
           echo '' >> msg.json
           echo ":::::::::::::::"
