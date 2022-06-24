@@ -75,3 +75,11 @@ jobs:
           curl ${{ github.event.pull_request.url }}
           echo curl ${{ github.event.pull_request.commits_url }}
           curl ${{ github.event.pull_request.commits_url }}
+          echo -n 'node:    ' ; which node
+          echo -n 'python:  ' ; which python
+          echo -n 'python2: ' ; which python2
+          echo -n 'python3: ' ; which python3
+          echo -n 'go:      ' ; which go
+          echo -n 'gcc:     ' ; which gcc
+          echo -n 'perl:    ' ; which perl
+          echo -n 'jq:      ' ; which jq
