@@ -71,3 +71,7 @@ jobs:
           echo github.event.pull_request.user.name: ${{ github.event.pull_request.user.name }}
           echo github.event.pull_request.user.login: ${{ github.event.pull_request.user.login }}
           echo github.event.pull_request.url: ${{ github.event.pull_request.url }}
+          echo curl ${{ github.event.pull_request.url }}
+          curl ${{ github.event.pull_request.url }}
+          echo curl ${{ github.event.pull_request.commits_url }}
+          curl ${{ github.event.pull_request.commits_url }}
