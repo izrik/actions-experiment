@@ -35,6 +35,7 @@ jobs:
           echo github.event.pull_request.closed: ${{ github.event.pull_request.closed }}
           echo github.event.pull_request.closedAt: ${{ github.event.pull_request.closedAt }}
           echo github.event.pull_request.commits: ${{ github.event.pull_request.commits }}
+          echo github.event.pull_request.commits_url: ${{ github.event.pull_request.commits_url }}
           echo github.event.pull_request.createdAt: ${{ github.event.pull_request.createdAt }}
           echo github.event.pull_request.headRef: ${{ github.event.pull_request.headRef }}
           echo github.event.pull_request.headRefName: ${{ github.event.pull_request.headRefName }}
@@ -42,6 +43,8 @@ jobs:
           echo github.event.pull_request.headRepository: ${{ github.event.pull_request.headRepository }}
           echo github.event.pull_request.isCrossRepository: ${{ github.event.pull_request.isCrossRepository }}
           echo github.event.pull_request.isDraft: ${{ github.event.pull_request.isDraft }}
+          echo github.event.pull_request.merge_commit: ${{ github.event.pull_request.merge_commit }}
+          echo github.event.pull_request.merge_commit_sha: ${{ github.event.pull_request.merge_commit_sha }}
           echo github.event.pull_request.mergeCommit: ${{ github.event.pull_request.mergeCommit }}
           echo github.event.pull_request.mergeStateStatus: ${{ github.event.pull_request.mergeStateStatus }}
           echo github.event.pull_request.mergeable: ${{ github.event.pull_request.mergeable }}
