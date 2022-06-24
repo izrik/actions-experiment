@@ -83,3 +83,22 @@ jobs:
           echo -n 'gcc:     ' ; which gcc
           echo -n 'perl:    ' ; which perl
           echo -n 'jq:      ' ; which jq
+      - name: prepare and send message
+        run: |
+          touch msg.json
+          echo '{"channel":"#test","text":"AUTOMATED MESSAGE: Something happened to a PR:\n' >> msg.json
+          echo 'number ${{github.event.pull_request.number}}\n' >> msg.json
+          echo ':link: ${{github.event.pull_request.url }}\n' >> msg.json
+          echo 'opened by ${{github.event.pull_request.author }}\n ' >> msg.json
+          echo 'commits: ' >> msg.json
+          curl ${{ github.event.pull_request.commits_url }} | jq '.[] | "  " + .sha[:8] + " " + .commit.message' >> msg.json
+          echo '"}' >> msg.json
+          echo ":::::::::::::::"
+          cat msg.json
+          echo ":::::::::::::::"
+          curl -v ${{ secrets.ROCKET_CHAT_SERVER_URI }}/api/v1/chat.postMessage \
+            -X POST \
+            --data @msg.json \
+            -H "X-Auth-Token: ${{ secrets.ROCKET_CHAT_TOKEN }}" \
+            -H "X-User-Id: ${{ secrets.ROCKET_CHAT_USER_ID }}" \
+            -H "Content-Type: application/json"
