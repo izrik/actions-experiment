@@ -25,6 +25,7 @@ jobs:
           echo github.event.push.head: ${{ github.event.push.head }}
           echo github.event.push.before: ${{ github.event.push.before }}
           echo github.event.push.commits: ${{ github.event.push.commits }}
+          echo ''
           echo github.event.push_id: ${{ github.event.push_id }}
           echo github.event.size: ${{ github.event.size }}
           echo github.event.distinct_size: ${{ github.event.distinct_size }}
@@ -32,6 +33,22 @@ jobs:
           echo github.event.head: ${{ github.event.head }}
           echo github.event.before: ${{ github.event.before }}
           echo github.event.commits: ${{ github.event.commits }}
+          echo ''
+          echo github.event.ref: ${{ github.event.ref }}
+          echo github.event.before: ${{ github.event.before }}
+          echo github.event.after: ${{ github.event.after }}
+          echo github.event.created: ${{ github.event.created }}
+          echo github.event.deleted: ${{ github.event.deleted }}
+          echo github.event.forced: ${{ github.event.forced }}
+          echo github.event.head_commit: ${{ github.event.head_commit }}
+          echo github.event.compare: ${{ github.event.compare }}
+          echo github.event.commits: ${{ github.event.commits }}
+          echo github.event.pusher: ${{ github.event.pusher }}
+          echo github.event.repository: ${{ github.event.repository }}
+          echo github.event.organization: ${{ github.event.organization }}
+          echo github.event.installation: ${{ github.event.installation }}
+          echo github.event.sender: ${{ github.event.sender }}
+          echo ''
           echo -n 'node:    ' ; which node
           echo -n 'python:  ' ; which python
           echo -n 'python2: ' ; which python2
