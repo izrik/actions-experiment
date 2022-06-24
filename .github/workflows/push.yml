@@ -14,7 +14,10 @@ jobs:
       - name: print values
         run: |
           echo github.event: ${{ github.event }}
-          echo github.event.push: ${{ github.event.pull_request }}
+          echo github.event_name: ${{ github.event_name }}
+          echo github.event.action: ${{ github.event.action }}
+          echo github.event.client_payload.versions: ${{ github.event.client_payload.versions }}
+          echo github.event.push: ${{ github.event.push }}
           echo github.event.push.ref: ${{ github.event.push.ref }}
           echo github.event.push.before: ${{ github.event.push.before }}
           echo github.event.push.after: ${{ github.event.push.after }}
@@ -37,9 +40,9 @@ jobs:
           echo -n 'gcc:     ' ; which gcc
           echo -n 'perl:    ' ; which perl
           echo -n 'jq:      ' ; which jq
-  notify_of_push:
-    runs-on: ubuntu-latest
-    steps:
+#  notify_of_push:
+#    runs-on: ubuntu-latest
+#    steps:
       - name: prepare and send message
         run: |
           echo -n '' > msg.json
