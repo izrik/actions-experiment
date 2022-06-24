@@ -1,6 +1,6 @@
 # This is a basic workflow to help you get started with Actions
 
-name: CI
+name: pr_notify
 
 # Controls when the workflow will run
 on:
@@ -20,7 +20,13 @@ jobs:
     steps:
       - name: print values
         run: |
+          echo github.event: ${{ github.event }}
+          echo github.event.pull_request: ${{ github.event.pull_request }}
+          echo github.event.pull_request.actor: ${{ github.event.pull_request.actor }}
           echo github.event.pull_request.author: ${{ github.event.pull_request.author }}
+          echo github.event.pull_request.asdf: ${{ github.event.pull_request.asdf }}
+          echo github.event.pull_request.author==null: ${{ github.event.pull_request.author == null }}
+          echo github.event.pull_request.author==\'\': ${{ github.event.pull_request.author == '' }}
           echo github.event.pull_request.author.login: ${{ github.event.pull_request.author.login }}
           echo github.event.pull_request.baseRef: ${{ github.event.pull_request.baseRef }}
           echo github.event.pull_request.baseRefName: ${{ github.event.pull_request.baseRefName }}
@@ -49,7 +55,25 @@ jobs:
           echo github.event.pull_request.state: ${{ github.event.pull_request.state }}
           echo github.event.pull_request.title: ${{ github.event.pull_request.title }}
           echo github.event.pull_request.updatedAt: ${{ github.event.pull_request.updatedAt }}
+          echo github.event.pull_request.user: ${{ github.event.pull_request.user }}
           echo github.event.pull_request.url: ${{ github.event.pull_request.url }}
+      - name: Run a one-line script
+        run: |
+          echo curl -v '${{ secrets.ROCKET_CHAT_SERVER_URI }}/api/v1/chat.postMessage' \
+            -X POST \
+            --data '{"channel":"#test","text":"AUTOMATED MESSAGE: Something happened to a PR:\n' \
+              'number ${{ github.event.pull_request.number }} \n' \
+              ':link: ${{ github.event.pull_request.url }} \n' \
+              'opened by ${{ github.event.pull_request.author }} "}' \
+            -H 'X-Auth-Token: ${{ secrets.ROCKET_CHAT_TOKEN }}' \
+            -H 'X-User-Id: ${{ secrets.ROCKET_CHAT_USER_ID }}' \
+            -H "Content-Type: application/json"
+          curl -v '${{ secrets.ROCKET_CHAT_SERVER_URI }}api/v1/chat.postMessage' \
+            -X POST \
+            --data '{"channel":"#test","text":"AUTOMATED MESSAGE: Something happened to a PR:\nnumber ${{ github.event.pull_request.number }} \n:link: ${{ github.event.pull_request.url }} \nopened by ${{ github.event.pull_request.author }} "}' \
+            -H 'X-Auth-Token: ${{ secrets.ROCKET_CHAT_TOKEN }}' \
+            -H 'X-User-Id: ${{ secrets.ROCKET_CHAT_USER_ID }}' \
+            -H "Content-Type: application/json"
   notify_merged:
     if: github.event.pull_request.merged == true
     # The type of runner that the job will run on
@@ -62,8 +86,11 @@ jobs:
 
       - name: print values
         run: |
+          echo github.event: ${{ github.event }}
           echo github.event.pull_request: ${{ github.event.pull_request }}
           echo github.event.pull_request.author: ${{ github.event.pull_request.author }}
+          echo github.event.pull_request.author==null: ${{ github.event.pull_request.author == null }}
+          echo github.event.pull_request.author==\'\': ${{ github.event.pull_request.author == '' }}
           echo github.event.pull_request.author.login: ${{ github.event.pull_request.author.login }}
           echo github.event.pull_request.baseRef: ${{ github.event.pull_request.baseRef }}
           echo github.event.pull_request.baseRefName: ${{ github.event.pull_request.baseRefName }}
@@ -93,12 +120,15 @@ jobs:
           echo github.event.pull_request.title: ${{ github.event.pull_request.title }}
           echo github.event.pull_request.updatedAt: ${{ github.event.pull_request.updatedAt }}
           echo github.event.pull_request.url: ${{ github.event.pull_request.url }}
-      # Runs a single command using the runners shell
       - name: Run a one-line script
         run: |
           curl -v ${{ secrets.ROCKET_CHAT_SERVER_URI }}/api/v1/chat.postMessage \
             -X POST \
-            --data '{"channel":"#test","text":"AUTOMATED MESSAGE: A pull request was opened by ${{github.event.pull_request.author }} and merged by ${{github.event.pull_request.mergedBy }}, [${{github.event.pull_request.number}}:link:](${{github.event.pull_request.url}})"}' \
+            --data '{"channel":"#test","text":"AUTOMATED MESSAGE: Something happened to a PR:\n'\
+              'number ${{github.event.pull_request.number}}\n' \
+              ':link: ${{github.event.pull_request.url }}\n' \
+              'opened by ${{github.event.pull_request.author }}' \
+              '"}' \
             -H "X-Auth-Token: ${{ secrets.ROCKET_CHAT_TOKEN }}" \
             -H "X-User-Id: ${{ secrets.ROCKET_CHAT_USER_ID }}" \
             -H "Content-Type: application/json"

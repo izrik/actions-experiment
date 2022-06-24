@@ -1,0 +1,50 @@
+# This is a basic workflow to help you get started with Actions
+
+name: pr
+
+on:
+  pull_request:
+
+jobs:
+  print_values:
+    runs-on: ubuntu-latest
+    steps:
+      - name: print values
+        run: |
+          echo github.event: ${{ github.event }}
+          echo github.event.pull_request: ${{ github.event.pull_request }}
+          echo github.event.pull_request.actor: ${{ github.event.pull_request.actor }}
+          echo github.event.pull_request.author: ${{ github.event.pull_request.author }}
+          echo github.event.pull_request.asdf: ${{ github.event.pull_request.asdf }}
+          echo github.event.pull_request.author==null: ${{ github.event.pull_request.author == null }}
+          echo github.event.pull_request.author==\'\': ${{ github.event.pull_request.author == '' }}
+          echo github.event.pull_request.author.login: ${{ github.event.pull_request.author.login }}
+          echo github.event.pull_request.baseRef: ${{ github.event.pull_request.baseRef }}
+          echo github.event.pull_request.baseRefName: ${{ github.event.pull_request.baseRefName }}
+          echo github.event.pull_request.baseRefOid: ${{ github.event.pull_request.baseRefOid }}
+          echo github.event.pull_request.baseRepository: ${{ github.event.pull_request.baseRepository }}
+          echo github.event.pull_request.closed: ${{ github.event.pull_request.closed }}
+          echo github.event.pull_request.closedAt: ${{ github.event.pull_request.closedAt }}
+          echo github.event.pull_request.commits: ${{ github.event.pull_request.commits }}
+          echo github.event.pull_request.createdAt: ${{ github.event.pull_request.createdAt }}
+          echo github.event.pull_request.headRef: ${{ github.event.pull_request.headRef }}
+          echo github.event.pull_request.headRefName: ${{ github.event.pull_request.headRefName }}
+          echo github.event.pull_request.headRefOid: ${{ github.event.pull_request.headRefOid }}
+          echo github.event.pull_request.headRepository: ${{ github.event.pull_request.headRepository }}
+          echo github.event.pull_request.isCrossRepository: ${{ github.event.pull_request.isCrossRepository }}
+          echo github.event.pull_request.isDraft: ${{ github.event.pull_request.isDraft }}
+          echo github.event.pull_request.mergeCommit: ${{ github.event.pull_request.mergeCommit }}
+          echo github.event.pull_request.mergeStateStatus: ${{ github.event.pull_request.mergeStateStatus }}
+          echo github.event.pull_request.mergeable: ${{ github.event.pull_request.mergeable }}
+          echo github.event.pull_request.merged: ${{ github.event.pull_request.merged }}
+          echo github.event.pull_request.mergedBy: ${{ github.event.pull_request.mergedBy }}
+          echo github.event.pull_request.number: ${{ github.event.pull_request.number }}
+          echo github.event.pull_request.potentialMergeCommit: ${{ github.event.pull_request.potentialMergeCommit }}
+          echo github.event.pull_request.publishedAt: ${{ github.event.pull_request.publishedAt }}
+          echo github.event.pull_request.repository: ${{ github.event.pull_request.repository }}
+          echo github.event.pull_request.resourcePath: ${{ github.event.pull_request.resourcePath }}
+          echo github.event.pull_request.state: ${{ github.event.pull_request.state }}
+          echo github.event.pull_request.title: ${{ github.event.pull_request.title }}
+          echo github.event.pull_request.updatedAt: ${{ github.event.pull_request.updatedAt }}
+          echo github.event.pull_request.user: ${{ github.event.pull_request.user }}
+          echo github.event.pull_request.url: ${{ github.event.pull_request.url }}
