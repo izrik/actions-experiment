@@ -84,3 +84,25 @@ jobs:
           echo -n 'gcc:     ' ; which gcc
           echo -n 'perl:    ' ; which perl
           echo -n 'jq:      ' ; which jq
+  notify_merged:
+    if: github.event.pull_request.merged == true
+    runs-on: ubuntu-latest
+    steps:
+      - name: prepare and send message
+        run: |
+          echo -n '' > msg.json
+          echo -n '{"channel":"#test","text":"The following PR has been merged:\n' >> msg.json
+          echo -n '${{github.event.pull_request.title}} [#${{github.event.pull_request.title}} :link:](${{github.event.pull_request.html_url }})\n' >> msg.json
+          echo -n 'Opened by ${{github.event.pull_request.user.login }}\n ' >> msg.json
+          echo -n 'Commits: \n' >> msg.json
+          curl ${{ github.event.pull_request.commits_url }} | jq -r '.[] | " * " + .sha[:8] + " " + .commit.message' | perl -npe 's/\n/\\n/g' >> msg.json
+          echo -n '"}' >> msg.json
+          echo ":::::::::::::::"
+          cat msg.json
+          echo ":::::::::::::::"
+          curl -v ${{ secrets.ROCKET_CHAT_SERVER_URI }}/api/v1/chat.postMessage \
+            -X POST \
+            --data @msg.json \
+            -H "X-Auth-Token: ${{ secrets.ROCKET_CHAT_TOKEN }}" \
+            -H "X-User-Id: ${{ secrets.ROCKET_CHAT_USER_ID }}" \
+            -H "Content-Type: application/json"

@@ -87,11 +87,10 @@ jobs:
       - name: prepare and send message
         run: |
           echo -n '' > msg.json
-          echo -n '{"channel":"#test","text":"AUTOMATED MESSAGE: Something happened to a PR:\n' >> msg.json
-          echo -n 'number ${{github.event.pull_request.number}}\n' >> msg.json
-          echo -n ':link: ${{github.event.pull_request.url }}\n' >> msg.json
-          echo -n 'opened by ${{github.event.pull_request.author }}\n ' >> msg.json
-          echo -n 'commits: \n' >> msg.json
+          echo -n '{"channel":"#test","text":"The following PR has been updated:\n' >> msg.json
+          echo -n '${{github.event.pull_request.title}} [#${{github.event.pull_request.title}} :link:](${{github.event.pull_request.html_url }})\n' >> msg.json
+          echo -n 'Opened by ${{github.event.pull_request.user.login }}\n ' >> msg.json
+          echo -n 'Commits: \n' >> msg.json
           curl ${{ github.event.pull_request.commits_url }} | jq -r '.[] | " * " + .sha[:8] + " " + .commit.message' | perl -npe 's/\n/\\n/g' >> msg.json
           echo -n '"}' >> msg.json
           echo ":::::::::::::::"
