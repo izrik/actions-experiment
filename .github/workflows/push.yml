@@ -7,7 +7,7 @@ on:
       - master
 
 jobs:
-  print_values:
+  notify_push_without_pr:
     runs-on: ubuntu-latest
     steps:
       - name: prepare and send message
@@ -23,26 +23,11 @@ jobs:
               (.committer.login != "web-flow") and
               (.commit.message | startswith("Merge pull request #") | not ))')
           if [[ "$is_push_without_pr" = 'true' ]]; then
-            echo -n '' > msg.json
-            echo -n '{"channel":"#test","text":"${{ github.event.pusher.name }} pushed directly to master\n' >> msg.json
-            echo -n 'Compare here: ${{ github.event.compare }}\n' >> msg.json
-            echo -n '"}' >> msg.json
-            echo '' >> msg.json
-            curl -v ${{ secrets.ROCKET_CHAT_SERVER_URI }}/api/v1/chat.postMessage \
-              -X POST \
-              --data @msg.json \
-              -H "X-Auth-Token: ${{ secrets.ROCKET_CHAT_TOKEN }}" \
-              -H "X-User-Id: ${{ secrets.ROCKET_CHAT_USER_ID }}" \
-              -H "Content-Type: application/json"
-            echo ":::::::::::::::"
             echo -n '' > msg-slack.json
             echo -n '{"text":"${{ github.event.pusher.name }} pushed directly to master\n' >> msg-slack.json
             echo -n 'Compare here: ${{ github.event.compare }}\n' >> msg-slack.json
             echo -n '"}' >> msg-slack.json
             echo '' >> msg-slack.json
-            echo ":::::::::::::::"
-            cat msg-slack.json
-            echo ":::::::::::::::"
             curl -v ${{ secrets.SLACK_WEBHOOK_URL }} \
               -X POST \
               --data @msg-slack.json \
