@@ -23,7 +23,7 @@ jobs:
           echo -n 'gcc:     ' ; which gcc
           echo -n 'perl:    ' ; which perl
           echo -n 'jq:      ' ; which jq
-      - name: Check for merged PR
+      - name: prepare and send message
         run: |
           url=${{ github.event.repository.commits_url }}
           commit_sha=${{ github.event.after }}
@@ -38,22 +38,19 @@ jobs:
               (.committer.login != "web-flow") and
               (.commit.message | startswith("Merge pull request #") | not ))')
           echo $is_push_without_pr
-#  notify_of_push:
-#    runs-on: ubuntu-latest
-#    steps:
-      - name: prepare and send message
-        run: |
-          echo -n '' > msg.json
-          echo -n '{"channel":"#test","text":"Someone (maybe ${{ github.event.pusher.name }}) pushed directly to master\n' >> msg.json
-          echo -n 'Compare here: ${{ github.event.compare }}\n' >> msg.json
-          echo -n '"}' >> msg.json
-          echo '' >> msg.json
-          echo ":::::::::::::::"
-          cat msg.json
-          echo ":::::::::::::::"
-          curl -v ${{ secrets.ROCKET_CHAT_SERVER_URI }}/api/v1/chat.postMessage \
-            -X POST \
-            --data @msg.json \
-            -H "X-Auth-Token: ${{ secrets.ROCKET_CHAT_TOKEN }}" \
-            -H "X-User-Id: ${{ secrets.ROCKET_CHAT_USER_ID }}" \
-            -H "Content-Type: application/json"
+          if [[ "$is_push_without_pr" = 'true' ]]; then
+            echo -n '' > msg.json
+            echo -n '{"channel":"#test","text":"Someone (maybe ${{ github.event.pusher.name }}) pushed directly to master\n' >> msg.json
+            echo -n 'Compare here: ${{ github.event.compare }}\n' >> msg.json
+            echo -n '"}' >> msg.json
+            echo '' >> msg.json
+            echo ":::::::::::::::"
+            cat msg.json
+            echo ":::::::::::::::"
+            curl -v ${{ secrets.ROCKET_CHAT_SERVER_URI }}/api/v1/chat.postMessage \
+              -X POST \
+              --data @msg.json \
+              -H "X-Auth-Token: ${{ secrets.ROCKET_CHAT_TOKEN }}" \
+              -H "X-User-Id: ${{ secrets.ROCKET_CHAT_USER_ID }}" \
+              -H "Content-Type: application/json"
+          fi
