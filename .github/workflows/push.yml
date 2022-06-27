@@ -25,7 +25,10 @@ jobs:
           echo -n 'jq:      ' ; which jq
       - name: Check for merged PR
         run: |
-          curl "${{ github.event.commits[0].url }}" > commit.json
+          url=${{ github.event.repository.commits_url }}
+          commit_sha=${{ github.event.after }}
+          commit_url=$(echo $url | sed 's/\{/sha\}/$commit_sha/')
+          curl "$commit_url" > commit.json
           cat commit.json
           cat commit.json | jq '(.parents | length < 2) or
              ((.commit.committer.name != "GitHub") and
