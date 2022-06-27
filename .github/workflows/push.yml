@@ -31,11 +31,13 @@ jobs:
           echo $commit_url
           curl "$commit_url" > commit.json
           cat commit.json
-          cat commit.json | jq '(.parents | length < 2) or
+          is_push_without_pr=$(
+            cat commit.json | jq '(.parents | length < 2) or
              ((.commit.committer.name != "GitHub") and
               (.commit.committer.email != "noreply@github.com") and
               (.committer.login != "web-flow") and
-              (.commit.message | startswith("Merge pull request #") | not ))'
+              (.commit.message | startswith("Merge pull request #") | not ))')
+          echo $is_push_without_pr
 #  notify_of_push:
 #    runs-on: ubuntu-latest
 #    steps:
