@@ -27,7 +27,7 @@ jobs:
         run: |
           url=${{ github.event.repository.commits_url }}
           commit_sha=${{ github.event.after }}
-          commit_url=$(echo $url | sed s/\{\\/sha\}/$commit_sha/)
+          commit_url=$(echo $url | sed s/\{\\/sha\}/\\/$commit_sha/)
           echo $commit_url
           curl "$commit_url" > commit.json
           cat commit.json
