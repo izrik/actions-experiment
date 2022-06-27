@@ -35,3 +35,12 @@ jobs:
               -H "X-User-Id: ${{ secrets.ROCKET_CHAT_USER_ID }}" \
               -H "Content-Type: application/json"
           fi
+      - name: Post to a Slack channel
+        id: slack
+        uses: slackapi/slack-github-action@v1.18.0
+        with:
+          # For posting a rich message using Block Kit
+          payload-with-path: "msg.json"
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+          SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK
