@@ -40,7 +40,7 @@ jobs:
           echo $is_push_without_pr
           if [[ "$is_push_without_pr" = 'true' ]]; then
             echo -n '' > msg.json
-            echo -n '{"channel":"#test","text":"Someone (maybe ${{ github.event.pusher.name }}) pushed directly to master\n' >> msg.json
+            echo -n '{"channel":"#test","text":"${{ github.event.pusher.name }} pushed directly to master\n' >> msg.json
             echo -n 'Compare here: ${{ github.event.compare }}\n' >> msg.json
             echo -n '"}' >> msg.json
             echo '' >> msg.json
