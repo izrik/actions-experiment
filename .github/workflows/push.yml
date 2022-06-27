@@ -36,8 +36,8 @@ jobs:
               -H "Content-Type: application/json"
             echo ":::::::::::::::"
             echo -n '' > msg-slack.json
-            echo -n '{"text":"${{ github.event.pusher.name }} pushed directly to master\n' >> msg.json
-            echo -n 'Compare here: ${{ github.event.compare }}\n' >> msg.json
+            echo -n '{"text":"${{ github.event.pusher.name }} pushed directly to master\n' >> msg-slack.json
+            echo -n 'Compare here: ${{ github.event.compare }}\n' >> msg-slack.json
             echo -n '"}' >> msg-slack.json
             echo '' >> msg-slack.json
             echo ":::::::::::::::"
