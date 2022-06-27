@@ -28,6 +28,7 @@ jobs:
           url=${{ github.event.repository.commits_url }}
           commit_sha=${{ github.event.after }}
           commit_url=$(echo $url | sed s/\{\\/sha\}/$commit_sha/)
+          echo $commit_url
           curl "$commit_url" > commit.json
           cat commit.json
           cat commit.json | jq '(.parents | length < 2) or
