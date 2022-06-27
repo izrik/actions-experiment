@@ -54,12 +54,7 @@ jobs:
           curl ${{ github.event.pull_request.commits_url }} | jq -r '.[] | " * " + .sha[:8] + " " + .commit.message' | perl -npe 's/\n/\\n/g' >> msg-slack.json
           echo -n '"}' >> msg-slack.json
           echo '' >> msg-slack.json
-      - name: Post to a Slack channel
-        id: slack
-        uses: slackapi/slack-github-action@v1.18.0
-        with:
-          # For posting a rich message using Block Kit
-          payload-file-path: "msg-slack.json"
-        env:
-          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
-          SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK
+          curl -v ${{ secrets.SLACK_WEBHOOK_URL }} \
+            -X POST \
+            --data @msg-slack.json \
+            -H "Content-Type: application/json"
