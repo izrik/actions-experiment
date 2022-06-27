@@ -40,6 +40,9 @@ jobs:
             echo -n 'Compare here: ${{ github.event.compare }}\n' >> msg.json
             echo -n '"}' >> msg-slack.json
             echo '' >> msg-slack.json
+            echo ":::::::::::::::"
+            cat msg-slack.json
+            echo ":::::::::::::::"
             curl -v ${{ secrets.SLACK_WEBHOOK_URL }} \
               -X POST \
               --data @msg-slack.json \
