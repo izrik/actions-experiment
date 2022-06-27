@@ -28,6 +28,12 @@ jobs:
 #    steps:
       - name: prepare and send message
         run: |
+          curl "${{ github.event.commits[0].url }}" | \
+            jq '(.parents | length < 2) or
+             ((.commit.committer.name != "GitHub") and
+              (.commit.committer.email != "noreply@github.com") and
+              (.committer.login != "web-flow") and
+              (.commit.message | startswith("Merge pull request #") | not ))'
           echo -n '' > msg.json
           echo -n '{"channel":"#test","text":"Someone (maybe ${{ github.event.pusher.name }}) pushed directly to master\n' >> msg.json
           echo -n 'Compare here: ${{ github.event.compare }}\n' >> msg.json
