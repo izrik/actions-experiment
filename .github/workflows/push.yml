@@ -26,6 +26,7 @@ jobs:
       - name: Check for merged PR
         run: |
           curl "${{ github.event.commits[0].url }}" > commit.json
+          cat commit.json
           cat commit.json | jq '(.parents | length < 2) or
              ((.commit.committer.name != "GitHub") and
               (.commit.committer.email != "noreply@github.com") and
