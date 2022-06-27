@@ -46,9 +46,14 @@ jobs:
             -H "X-User-Id: ${{ secrets.ROCKET_CHAT_USER_ID }}" \
             -H "Content-Type: application/json"
           echo ":::::::::::::::"
-          echo '{"text":' > msg-slack.json
-          cat msg.json >> msg-slack.json
-          echo '}' >> msg-slack.json
+          echo -n '' > msg-slack.json
+          echo -n '{"text":"The following PR has been merged:\n' >> msg-slack.json
+          echo -n '${{github.event.pull_request.title}} [#${{github.event.pull_request.number}}](${{github.event.pull_request.html_url }})\n' >> msg-slack.json
+          echo -n 'Opened by ${{github.event.pull_request.user.login }}\n ' >> msg-slack.json
+          echo -n 'Commits: \n' >> msg-slack.json
+          curl ${{ github.event.pull_request.commits_url }} | jq -r '.[] | " * " + .sha[:8] + " " + .commit.message' | perl -npe 's/\n/\\n/g' >> msg-slack.json
+          echo -n '"}' >> msg-slack.json
+          echo '' >> msg-slack.json
       - name: Post to a Slack channel
         id: slack
         uses: slackapi/slack-github-action@v1.18.0
