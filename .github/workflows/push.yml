@@ -19,6 +19,16 @@ jobs:
           ls -la $GITHUB_WORKSPACE
           ls -la $GITHUB_WORKSPACE/.github/workflows/push_template.txt
           find $GITHUB_WORKSPACE -name message_format.txt
+      - name: prepare merge message
+        run: |
+          export GITHUB_EVENT_PULL_REQUEST_TITLE="${{ github.event.pull_request.title }}"
+          export GITHUB_EVENT_PULL_REQUEST_HTML_URL="${{ github.event.pull_request.html_url }}"
+          export GITHUB_EVENT_PULL_REQUEST_NUMBER="${{ github.event.pull_request.number }}"
+          export GITHUB_EVENT_PULL_REQUEST_USER_LOGIN="${{ github.event.pull_request.user.login }}"
+          export LIST_OF_COMMITS=$(curl ${{ github.event.pull_request.commits_url }} | jq -r '.[] | " - " + .sha[:8] + " " + .commit.message' | perl -npe 's/\n/\\n/g' >> msg-slack.json)
+          echo "LIST_OF_COMMITS: :::$LIST_OF_COMMITS:::"
+          cat $GITHUB_WORKSPACE/.github/workflows/merge_template.txt | envsubst > msg-slack.json
+          cat msg-slack.json
       - name: prepare and send message
         run: |
           url=${{ github.event.repository.commits_url }}
