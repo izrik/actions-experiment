@@ -12,8 +12,8 @@ jobs:
     steps:
       - name: check envsubst
         run: |
-          echo -n 'envsubst: ' ; which envsubst
-          echo -n 'j2cli: ' ; which j2cli
+          echo -n 'envsubst: ' ; which envsubst || true
+          echo -n 'j2cli: ' ; which j2cli || true
           pwd
           ls -la
           find / -name message_format.txt
