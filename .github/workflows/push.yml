@@ -17,6 +17,7 @@ jobs:
           echo -n 'j2cli: ' ; which j2cli || true
           pwd
           ls -la $GITHUB_WORKSPACE
+          ls -la $GITHUB_WORKSPACE/.github/workflows/push_template.txt
           find $GITHUB_WORKSPACE -name message_format.txt
       - name: prepare and send message
         run: |
@@ -31,11 +32,9 @@ jobs:
               (.committer.login != "web-flow") and
               (.commit.message | startswith("Merge pull request #") | not ))')
           if [[ "$is_push_without_pr" = 'true' ]]; then
-            echo -n '' > msg-slack.json
-            echo -n '{"text":"${{ github.event.pusher.name }} pushed directly to master\n' >> msg-slack.json
-            echo -n 'Compare here: ${{ github.event.compare }}\n' >> msg-slack.json
-            echo -n '"}' >> msg-slack.json
-            echo '' >> msg-slack.json
+            export GITHUB_EVENT_PUSHER_NAME="${{ github.event.pusher.name }}
+            export $GITHUB_EVENT_COMPARE="${{ github.event.compare }}
+            cat $GITHUB_WORKSPACE/.github/workflows/push_template.txt | envsubst > msg-slack.json 
             curl -v ${{ secrets.SLACK_WEBHOOK_URL }} \
               -X POST \
               --data @msg-slack.json \

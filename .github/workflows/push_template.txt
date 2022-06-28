@@ -1,0 +1,1 @@
+{"text":"$GITHUB_EVENT_PUSHER_NAME pushed directly to master\nCompare here: $GITHUB_EVENT_COMPARE\n"}
