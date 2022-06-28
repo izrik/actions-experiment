@@ -11,14 +11,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - name: check envsubst
-        run: |
-          echo -n 'envsubst: ' ; which envsubst || true
-          echo -n 'j2cli: ' ; which j2cli || true
-          pwd
-          ls -la $GITHUB_WORKSPACE
-          ls -la $GITHUB_WORKSPACE/.github/workflows/push_template.txt
-          find $GITHUB_WORKSPACE -name message_format.txt
       - name: prepare and send message
         run: |
           url=${{ github.event.repository.commits_url }}
