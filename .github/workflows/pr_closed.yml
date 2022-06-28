@@ -14,7 +14,7 @@ jobs:
       - uses: actions/checkout@v3
       - name: prepare and send message
         run: |
-          export GITHUB_EVENT_PULL_REQUEST_TITLE="${{ github.event.pull_request.title }}
+          export GITHUB_EVENT_PULL_REQUEST_TITLE="${{ github.event.pull_request.title }}"
           export GITHUB_EVENT_PULL_REQUEST_HTML_URL="${{ github.event.pull_request.html_url }}"
           export GITHUB_EVENT_PULL_REQUEST_NUMBER="${{ github.event.pull_request.number }}"
           export GITHUB_EVENT_PULL_REQUEST_USER_LOGIN="${{ github.event.pull_request.user.login }}"
