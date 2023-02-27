@@ -1,4 +1,4 @@
-name:Do the things
+name: Do the things
 
 on:
   pull_request:
