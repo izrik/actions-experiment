@@ -74,6 +74,6 @@ jobs:
           echo "github.event.description=${{github.event.description}}"
           echo "github.master_branch=${{github.master_branch}}"
           echo "github.description=${{github.description}}"
-          echo "g.e.p.h.sha || github.sha ${{ github.event.push.head.sha || github.sha }}"
-          echo "github.sha || g.e.p.h.sha: ${{ github.sha || github.event.push.head.sha }}"
+          echo "g.e.pr.h.sha || github.sha ${{ github.event.pull_request.head.sha || github.sha }}"
+          echo "github.sha || g.e.pr.h.sha: ${{ github.sha || github.event.pull_request.head.sha }}"
           echo "Entire context: ${{ toJSON(github.event) }}
