@@ -6,7 +6,7 @@ on:
     types: [published]
 
 jobs:
-  on_create_job:
+  on_release_job:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -82,3 +82,5 @@ jobs:
           echo "github.release.sender=${{github.release.sender}}"
           echo "github.event.sender=${{github.event.sender}}"
           echo "github.sender=${{github.sender}}"
+          echo "github.event.release=${{github.event.release}}"
+          echo "github.release=${{github.release}}"
