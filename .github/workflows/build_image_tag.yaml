@@ -1,4 +1,4 @@
-name: Build and push images for commits
+name: Build and push images for tags
 
 on:
   create:
