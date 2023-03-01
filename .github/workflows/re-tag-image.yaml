@@ -1,0 +1,35 @@
+name: Build and push images for tags
+
+on:
+  create:
+
+env:
+  COMMIT_IN_QUESTION: "${{ github.sha }}"
+  VERSION_TAG_TO_BUILD: "${{ github.ref_name }}"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    if: github.ref_type == 'tag'
+    steps:
+      -
+        name: Checkout
+        uses: actions/checkout@v3
+#      -
+#        name: Set up QEMU
+#        uses: docker/setup-qemu-action@v2
+      -
+        name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+      -
+        name: Login to Docker Hub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_TOKEN }}
+      -
+        name: Pull, re-tag, and push
+        run: |
+          docker pull izrik/actions-experiment:${{ env.COMMIT_IN_QUESTION }}
+          docker tag izrik/actions-experiment:${{ env.COMMIT_IN_QUESTION }} izrik/actions-experiment:${{ env.VERSION_TAG_TO_BUILD }}
+          docker push izrik/actions-experiment:${{ env.VERSION_TAG_TO_BUILD }}
