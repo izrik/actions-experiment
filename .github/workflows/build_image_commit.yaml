@@ -3,6 +3,7 @@ name: Build and push images for commits
 on:
   push:
     branches:
+      - '*'
 
 env:
   VERSION_TAG_TO_BUILD: "${{ github.event.pull_request.head.sha || github.sha }}"
