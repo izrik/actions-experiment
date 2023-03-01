@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - name: prepare and send message
+      - name: on_create step
         run: |
           echo "github=${{github}}"
           echo "github.action=${{github.action}}"
@@ -77,3 +77,13 @@ jobs:
           echo "github.create.pusher_type=${{github.create.pusher_type}}"
           echo "github.event.pusher_type=${{github.event.pusher_type}}"
           echo "github.pusher_type=${{github.pusher_type}}"
+
+      - name: on_create check for branch
+        run: |
+          echo "it is a branch"
+        if: github.ref_type == "branch"
+
+      - name: on_create check for tag
+        run: |
+          echo "it is a tag"
+        if: github.ref_type == "tag"
