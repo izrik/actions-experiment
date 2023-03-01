@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - name: prepare and send message
+      - name: on_push prepare and send message
         run: |
           url=${{ github.event.repository.commits_url }}
           commit_sha=${{ github.event.after }}
