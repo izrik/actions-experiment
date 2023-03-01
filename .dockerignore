@@ -1,0 +1,8 @@
+__pycache__
+htmlcov
+.idea/
+.mypy_cache
+.git
+.cargo
+instance/
+.DS_Store
