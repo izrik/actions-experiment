@@ -105,6 +105,15 @@ jobs:
       -
         name: Pull, re-tag, and push
         run: |
-          docker pull izrik/actions-experiment:${{ env.COMMIT_IN_QUESTION }}
-          docker tag izrik/actions-experiment:${{ env.COMMIT_IN_QUESTION }} izrik/actions-experiment:${{ env.VERSION_TAG_TO_BUILD }}
-          docker push izrik/actions-experiment:${{ env.VERSION_TAG_TO_BUILD }}
+          components=(
+            one
+            two
+            three
+          )
+          for f in ${components[*]}
+          do
+            echo $f
+            docker pull izrik/actions-experiment:${{ env.COMMIT_IN_QUESTION }}
+            docker tag izrik/actions-experiment:${{ env.COMMIT_IN_QUESTION }} izrik/actions-experiment:${{ env.VERSION_TAG_TO_BUILD }}
+            docker push izrik/actions-experiment:${{ env.VERSION_TAG_TO_BUILD }}
+          done
