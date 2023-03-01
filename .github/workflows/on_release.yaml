@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - name: prepare and send message
+      - name: on_release step
         run: |
           echo "github=${{github}}"
           echo "github.action=${{github.action}}"
