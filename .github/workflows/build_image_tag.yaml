@@ -35,3 +35,5 @@ jobs:
           build-args: |
             COMMIT=${{ env.COMMIT_IN_QUESTION }}
           tags: "izrik/actions-experiment:${{ env.VERSION_TAG_TO_BUILD }}"
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
