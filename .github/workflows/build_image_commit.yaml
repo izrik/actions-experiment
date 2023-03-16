@@ -4,7 +4,7 @@ on:
   push:
 
 env:
-  VERSION_TAG_TO_BUILD: "${{ github.event.pull_request.head.sha || github.sha }}"
+  VERSION_TAG_TO_BUILD: "${{ github.sha }}"
 
 jobs:
   build:
