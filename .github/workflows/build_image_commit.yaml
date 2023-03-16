@@ -109,3 +109,19 @@ jobs:
           build-args: |
             COMMIT=${{ env.VERSION_TAG_TO_BUILD}}
           tags: "izrik/actions-experiment:${{ env.VERSION_TAG_TO_BUILD}}"
+
+      - name: Pull, re-tag, and push
+        if: github.ref_type == 'tag'
+        run: |
+          components=(
+            one
+            two
+            three
+          )
+          for f in ${components[*]}
+          do
+            echo $f
+            docker pull izrik/actions-experiment:${{ env.VERSION_TAG_TO_BUILD }}
+            docker tag izrik/actions-experiment:${{ env.VERSION_TAG_TO_BUILD }} izrik/actions-experiment:${{ github.ref_name }}
+            docker push izrik/actions-experiment:${{ github.ref_name }}
+          done
