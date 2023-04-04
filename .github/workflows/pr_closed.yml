@@ -21,7 +21,4 @@ jobs:
           export LIST_OF_COMMITS=$(curl ${{ github.event.pull_request.commits_url }} | jq -r '.[] | " - " + .sha[:8] + " " + .commit.message' | perl -npe 's/\n/\\n/g')
           echo "LIST_OF_COMMITS: :::$LIST_OF_COMMITS:::"
           cat $GITHUB_WORKSPACE/.github/workflows/merge_template.txt | envsubst > msg-slack.json
-          curl -v ${{ secrets.SLACK_WEBHOOK_URL }} \
-            -X POST \
-            --data @msg-slack.json \
-            -H "Content-Type: application/json"
+          echo "At this point, send a message some-whither, to the effect that the PR was merged."
