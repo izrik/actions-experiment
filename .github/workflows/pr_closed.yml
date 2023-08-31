@@ -58,3 +58,4 @@ jobs:
     if: ${{ github.event.pull_request.merged == false }}
     steps:
       - run: echo "this runs when the PR is closed but not merged"
+
