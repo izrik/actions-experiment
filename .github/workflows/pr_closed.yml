@@ -1,3 +1,4 @@
+---
 name: pr_closed
 
 on:
@@ -7,18 +8,53 @@ on:
       - master
 
 jobs:
-  notify_merged:
-    if: github.event.pull_request.merged == true
+#  notify_merged:
+#    if: github.event.pull_request.merged == true
+#    runs-on: ubuntu-latest
+#    steps:
+#      - uses: actions/checkout@v3
+#      - name: on_pr_closed prepare and send message
+#        run: |
+#          export GITHUB_EVENT_PULL_REQUEST_TITLE="${{ github.event.pull_request.title }}"
+#          export GITHUB_EVENT_PULL_REQUEST_HTML_URL="${{ github.event.pull_request.html_url }}"
+#          export GITHUB_EVENT_PULL_REQUEST_NUMBER="${{ github.event.pull_request.number }}"
+#          export GITHUB_EVENT_PULL_REQUEST_USER_LOGIN="${{ github.event.pull_request.user.login }}"
+#          export LIST_OF_COMMITS=$(curl ${{ github.event.pull_request.commits_url }} | jq -r '.[] | " - " + .sha[:8] + " " + .commit.message' | perl -npe 's/\n/\\n/g')
+#          echo "LIST_OF_COMMITS: :::$LIST_OF_COMMITS:::"
+#          cat $GITHUB_WORKSPACE/.github/workflows/merge_template.txt | envsubst > msg-slack.json
+#          echo "At this point, send a message some-whither, to the effect that the PR was merged."
+
+  always-runs:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - name: on_pr_closed prepare and send message
-        run: |
-          export GITHUB_EVENT_PULL_REQUEST_TITLE="${{ github.event.pull_request.title }}"
-          export GITHUB_EVENT_PULL_REQUEST_HTML_URL="${{ github.event.pull_request.html_url }}"
-          export GITHUB_EVENT_PULL_REQUEST_NUMBER="${{ github.event.pull_request.number }}"
-          export GITHUB_EVENT_PULL_REQUEST_USER_LOGIN="${{ github.event.pull_request.user.login }}"
-          export LIST_OF_COMMITS=$(curl ${{ github.event.pull_request.commits_url }} | jq -r '.[] | " - " + .sha[:8] + " " + .commit.message' | perl -npe 's/\n/\\n/g')
-          echo "LIST_OF_COMMITS: :::$LIST_OF_COMMITS:::"
-          cat $GITHUB_WORKSPACE/.github/workflows/merge_template.txt | envsubst > msg-slack.json
-          echo "At this point, send a message some-whither, to the effect that the PR was merged."
+      - run: echo "this always runs"
+
+  runs-when-merged-1:
+    runs-on: ubuntu-latest
+    if: github.event.pull_request.merged
+    steps:
+      - run: echo "this runs when the PR is merged 1"
+
+  runs-when-merged-2:
+    runs-on: ubuntu-latest
+    if: github.event.pull_request.merged == true
+    steps:
+      - run: echo "this runs when the PR is merged 2"
+
+  runs-when-merged-3:
+    runs-on: ubuntu-latest
+    if: ${{ github.event.pull_request.merged }}
+    steps:
+      - run: echo "this runs when the PR is merged 3"
+
+  runs-when-merged-4:
+    runs-on: ubuntu-latest
+    if: ${{ github.event.pull_request.merged == true }}
+    steps:
+      - run: echo "this runs when the PR is merged 4"
+
+  runs-when-closed:
+    runs-on: ubuntu-latest
+    if: ${{ github.event.pull_request.merged == false }}
+    steps:
+      - run: echo "this runs when the PR is closed but not merged"
