@@ -44,7 +44,7 @@ jobs:
           echo "https://github.com/${{github.repository}}/commit/${{github.sha}}/checks/${{github.run_id}}"
 
           echo "github.server_url: ${{github.server_url}}"
-          echo "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+          echo "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
 
   runs-when-merged-1:
     runs-on: ubuntu-latest
