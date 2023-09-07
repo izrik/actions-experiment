@@ -52,6 +52,12 @@ jobs:
           echo "github.pull_request.comments_url: ${{github.pull_request.comments_url}}"
           echo "github.pull_request.statuses_url: ${{github.pull_request.statuses_url}}"
 
+          echo "github.event.pull_request.url: ${{github.event.pull_request.url}}"
+          echo "github.event.pull_request.html_url: ${{github.event.pull_request.html_url}}"
+          echo "github.event.pull_request.issue_url: ${{github.event.pull_request.issue_url}}"
+          echo "github.event.pull_request.comments_url: ${{github.event.pull_request.comments_url}}"
+          echo "github.event.pull_request.statuses_url: ${{github.event.pull_request.statuses_url}}"
+
           echo "github.action: ${{github.action}}"
           echo "github.action_path: ${{github.action_path}}"
           echo "github.action_ref: ${{github.action_ref}}"
