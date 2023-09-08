@@ -130,6 +130,35 @@ jobs:
     steps:
       - run: echo "this runs when the PR is merged 4"
 
+  do-the-thing:
+    runs-on: ubuntu-latest
+    if: ${{ github.event.pull_request.merged == true }}
+    env:
+      ENVIRONMENT_NAME: env-name
+      CONFLUENCE_PARENT_PAGE_ID: confluence-parent-page-id
+      CONFLUENCE_SPACE_ID: confluence-space-id
+      VERSION: x.y.z.w
+    steps:
+      - run:
+          echo ./.github/workflows/_post_page_to_confluence.py \
+            --username "${{vars.CONFLUENCE_USERNAME}}" \
+            --api-token "${{vars.CONFLUENCE_API_TOKEN}}" \
+            --space-id "$CONFLUENCE_SPACE_ID" \
+            --content-from-file .github/workflows/deployment_to_backend_confluence.json \
+            -t ENVIRONMENT_NAME="$ENVIRONMENT_NAME" \
+            -t VERSION="$VERSION" \
+            -t TRIGGERED_BY="${{github.actor}}" \
+            -t TRIGGERED_BY_URL="https://github.com/orchiddevelopers/infrastructure" \
+            -t STARTED_AT_TIME="2023-09-07 16:34" \
+            -t COMPLETED_AT_TIME="2023-09-07 16:35" \
+            -t OUTCOME="$OUTCOME" \
+            -T RESULTS=staging-output.txt \
+            -t PULL_REQUEST="${{github.event.pull_request.url}}" \
+            -t GITHUB_ACTIONS_RUN="${{github.server_url}}/${{github.repository}}/actions/runs/${{github.run_id}}" \
+            -j \
+            --title 'Deploy $VERSION to production - 2023-09-07 17:07' \
+            --parent-id "$CONFLUENCE_PARENT_PAGE_ID"
+
   runs-when-closed:
     runs-on: ubuntu-latest
     if: ${{ github.event.pull_request.merged == false }}
