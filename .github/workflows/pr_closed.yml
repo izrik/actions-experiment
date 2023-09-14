@@ -6,6 +6,8 @@ on:
     types: [closed]
     branches:
       - master
+    paths:
+      - "info.yaml"
 
 jobs:
 #  notify_merged:
