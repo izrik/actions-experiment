@@ -1,0 +1,9 @@
+---
+info:
+  things:
+    - thing1
+    - thing2
+  stuff:
+    one: 1
+    two: 2
+    three: 3
