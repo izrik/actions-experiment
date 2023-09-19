@@ -99,6 +99,6 @@ jobs:
 
   runs-when-closed:
     runs-on: ubuntu-latest
-    if: !github.event.pull_request.merged
+    if: "!github.event.pull_request.merged"
     steps:
       - run: echo "this runs when the PR is closed but not merged"
