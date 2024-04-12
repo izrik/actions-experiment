@@ -84,8 +84,7 @@ jobs:
           echo "job.container.network: ${{job.container.network}}"
           echo "job.services: ${{job.services}}"
           echo "job.status: ${{job.status}}"
-          #cat /etc/oc-release
-          ls /etc
+          cat /etc/os-release
           uname -a
 
       - name: Run
