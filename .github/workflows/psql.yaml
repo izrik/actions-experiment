@@ -12,8 +12,6 @@ jobs:
 
       - name: Workflow info
         run: |
-          psql --help
-
           echo "GITHUB_REPOSITORY: ${GITHUB_REPOSITORY}"
           echo "GITHUB_SHA: ${GITHUB_SHA}"
           echo "GITHUB_RUN_ID: ${GITHUB_RUN_ID}"
@@ -86,9 +84,9 @@ jobs:
           echo "job.container.network: ${{job.container.network}}"
           echo "job.services: ${{job.services}}"
           echo "job.status: ${{job.status}}"
-          cat /etc/oc-release
+          cat /etc/os-release
           uname -a
 
       - name: Run
         run: |
-          psql --help
+          psql --version
