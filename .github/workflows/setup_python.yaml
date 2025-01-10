@@ -85,7 +85,7 @@ jobs:
           echo "job.services: ${{job.services}}"
           echo "job.status: ${{job.status}}"
           cat /etc/oc-release || echo 'file /etc/os-release not found'
-          uname -a || echo 'failed to uname
+          uname -a || echo 'failed to uname'
 
       - name: Set up Python
         uses: actions/setup-python@v2
