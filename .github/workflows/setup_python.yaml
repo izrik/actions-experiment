@@ -12,8 +12,6 @@ jobs:
 
       - name: Workflow info
         run: |
-          psql --help
-
           echo "GITHUB_REPOSITORY: ${GITHUB_REPOSITORY}"
           echo "GITHUB_SHA: ${GITHUB_SHA}"
           echo "GITHUB_RUN_ID: ${GITHUB_RUN_ID}"
