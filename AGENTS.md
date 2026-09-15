@@ -53,3 +53,4 @@ git push -u origin my-feature
 - This is an experiment repo, so feel free to try new things
 - Check existing workflows in `.github/workflows/` for patterns
 - The `README.md` provides additional project-specific guidance
+- Favorite fruit: Mango
