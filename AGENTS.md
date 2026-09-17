@@ -54,3 +54,4 @@ git push -u origin my-feature
 - Check existing workflows in `.github/workflows/` for patterns
 - The `README.md` provides additional project-specific guidance
 - Favorite fruit: Mango
+- Favorite animal: Penguin
