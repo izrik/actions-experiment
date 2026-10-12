@@ -5,10 +5,11 @@ symlink to this file.
 
 ## What this repo is
 
-A sandbox for experimenting with GitHub Actions. There is no application code,
-build system, or test suite; the "product" is the workflow files themselves and
-what they print when they run. Most changes are made to trigger workflows and
-observe their behavior.
+A sandbox for experimenting with GitHub Actions. There is no application code or
+build system; the "product" is the workflow files themselves and what they print
+when they run. Most changes are made to trigger workflows and observe their
+behavior. The test suite under `tests/` is a placeholder that exists so CI has
+something to run.
 
 ## Layout
 
@@ -21,6 +22,8 @@ observe their behavior.
       commented out.
     - `psql.yaml` — runs on every PR; checks `psql` availability on the runner
       and dumps context values.
+    - `ci.yaml` — runs on every PR; installs `requirements-dev.txt` and runs
+      the `pytest` suite.
   - Disabled workflows: files named `__<name>.yaml__` / `__<name>.yml__`. The
     trailing `__` stops GitHub from loading them. To re-enable one, rename it to
     drop the leading and trailing underscores. They cover building and pushing
@@ -40,7 +43,8 @@ observe their behavior.
 - Default branch is `master`.
 - Workflows reference secrets `DOCKER_USERNAME`, `DOCKER_TOKEN`, and
   `SLACK_WEBHOOK_URL`; never hard-code their values.
-- There are no tests to run. To validate a workflow change, check YAML syntax
+- Run the test suite with `pytest` (install it via `pip install -r
+  requirements-dev.txt`). To validate a workflow change, check YAML syntax
   locally (e.g. `python -c 'import yaml,sys; yaml.safe_load(open(sys.argv[1]))' <file>`)
   and then observe the run on GitHub (`gh run list`, `gh run view`).
 - Keep `CLAUDE.md` as the real file and `AGENTS.md` as a symlink to it.
