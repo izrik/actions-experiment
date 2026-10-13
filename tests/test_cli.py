@@ -15,11 +15,23 @@ CLI_PATH = os.path.join(
 def test_greet():
     assert cli.greet("World") == "Hello, World!"
     assert cli.greet("World", shout=True) == "HELLO, WORLD!"
+    assert cli.greet("Steve") == "Hello, Steve!"
+    assert cli.greet("sTeVe", shout=True) == "HELLO, STEVE!"
 
 
 def test_add():
+
+    assert cli.add([]) == 0
+    assert cli.add([1]) == 1
+    assert cli.add([1, 2]) == 3
     assert cli.add([1, 2, 3]) == 6
+    assert cli.add([1, 2, 3, 4]) == 10
+    assert cli.add([2, 3, 4]) == 9
+    assert cli.add([3, 4]) == 7
+    assert cli.add([4]) == 4
     assert cli.add([1.5, 2]) == 3.5
+    with pytest.raises(TypeError) as e:
+        cli.add(["a", "b", "c"]) == "abc"
 
 
 def test_repeat():
