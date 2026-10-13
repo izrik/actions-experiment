@@ -8,8 +8,7 @@ def test_arithmetic():
 
 
 def test_multiplication():
-    # Deliberately wrong so CI fails; fix to 12 once the failure is observed.
-    assert 3 * 4 == 5
+    assert 3 * 4 == 12
 
 
 def test_string_formatting():
