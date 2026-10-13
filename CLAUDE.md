@@ -35,6 +35,11 @@ something to run.
   path-filtered PR workflows.
 - `Dockerfile` — minimal Ubuntu image used by the image-build workflows; bakes
   the `COMMIT` build arg into `/commit.md`.
+- `cli.py` — a small stdlib-only `argparse` command-line tool (`greet`, `add`,
+  `repeat` subcommands) that exists purely as something to work on for
+  dev/test purposes; run it with `python cli.py --help`. Tested by
+  `tests/test_cli.py`; `pytest.ini` puts the repo root on `sys.path` so tests
+  can `import cli`.
 - `README.md`, `example-file.txt` — filler content, often edited just to create
   a commit.
 
