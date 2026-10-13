@@ -7,6 +7,10 @@ def test_arithmetic():
     assert 1 + 1 == 2
 
 
+def test_multiplication():
+    assert 3 * 4 == 12
+
+
 def test_string_formatting():
     assert "actions-{}".format("experiment") == "actions-experiment"
 
