@@ -32,6 +32,13 @@ def test_add():
     assert cli.add([1.5, 2]) == 3.5
     with pytest.raises(TypeError) as e:
         cli.add(["a", "b", "c"]) == "abc"
+    assert cli.add([7]) == 7
+    assert cli.add([-1, -2, 3]) == 0
+    assert cli.add([-5, 2]) == -3
+    assert cli.add([0.25, 0.5]) == 0.75
+    result = cli.add([1.5, 2.5])
+    assert result == 4
+    assert isinstance(result, int)
 
 
 def test_repeat():
