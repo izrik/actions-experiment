@@ -8,6 +8,7 @@ ARG COMMIT=unknown
 ENV COMMIT_VAR=$COMMIT
 
 LABEL org.opencontainers.image.title="actions-experiment" \
+    org.opencontainers.image.authors="Yttob Ecaftobcm (https://github.com/yttob)" \
     org.opencontainers.image.description="GitHub Actions experiment image with a Python CLI for development and testing." \
     org.opencontainers.image.source="https://github.com/izrik/actions-experiment" \
     org.opencontainers.image.revision=$COMMIT
