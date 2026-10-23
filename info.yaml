@@ -3,6 +3,7 @@ info:
   things:
     - thing1
     - thing2
+    - thing3
   stuff:
     one: 1
     two: 2
